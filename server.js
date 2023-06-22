@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
@@ -14,8 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static('public'));
 
-const dbURI = 'mongodb+srv://sonakshi:1234@cluster0.xwbbzcq.mongodb.net/Book-Inventory?retryWrites=true&w=majority';
-mongoose.connect(dbURI).then((res) => {
+mongoose.connect(process.env.MONGO_URI).then((res) => {
     console.log("Connected to DB");
     app.listen(port);
 }).catch(err => {
