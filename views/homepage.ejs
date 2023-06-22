@@ -19,11 +19,12 @@
             <%items.forEach(function(book) { %>
                 <div class="p-2 bd-highlight">
                     <div class="book">
-                        <img src="data:book/<%=book.image.contentType%>;base64,<%=book.image.data.toString('base64') %>"/>
-                        <div class="text">
-                            <h5><%= book.name %></h5>
-                            <p><%= book.author %></p>
-                        </div>
+                            <img src="data:book/<%=book.image.contentType%>;base64,<%=book.image.data.toString('base64') %>"/>
+                            <div class="text">
+                                <h5><%= book.name %></h5>
+                                <p><%= book.author %></p>
+                                <a href="/delete/<%= book._id %>" type="button" class="btn btn-danger">Delete</a>
+                            </div>
                     </div>
                 </div>
            <% }) %>

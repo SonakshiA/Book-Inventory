@@ -29,7 +29,7 @@ const Storage = multer.diskStorage({
         cb(null, 'uploads') //creates a folder called uploads and stores the files in it
     }, 
     filename:(req,file,cb) => {
-        cb(null, file.originalname)
+        cb(null, file.originalname) //first null is for an error if encountered, second is for successful retrieval
     }
 });
 
@@ -50,6 +50,16 @@ app.get('/',(req,res) => {
 
 app.get('/upload',(req,res) => {
     res.render('form')
+})
+
+app.get('/delete/:_id',(req,res)=>{
+    const {_id} = req.params;
+    Book.deleteOne({_id}).then(() => {
+        console.log("Deleted book");
+        res.redirect("/");
+    }).catch(err => {
+        console.log(err);
+    })
 })
 
 app.post('/upload',upload.single('image'),(req,res,next) => {
